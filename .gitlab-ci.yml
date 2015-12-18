@@ -1,0 +1,11 @@
+environment:
+  script:
+  - virtualenv --python=python3 ../virtualenv
+  - ../virtualenv/bin/pip install -r requirements.txt
+
+test:
+  script:
+  - ../virtualenv/bin/python3 manage.py test lists
+  only:
+  - master
+
