@@ -28,14 +28,14 @@ class ListAndItemModelsTest(TestCase):
 
 class ListViewTest(TestCase):
 
-    def test_displaying_record_to_website(self): #b
+    def test_displays_record_to_website(self):#b
         correct_list = List.objects.create()
-        Item.objects.create(guessnumber=22, number=16, result='Kamu kalah!!', list=correct_list)
+        Item.objects.create(guessnumber=22,number=1,result='Kamu kalah!!', list=correct_list)
 
-        response = self.client.get('/lists/%d/' % (correct_list.id,))
-
-        self.assertContains(response, 'Tebakan: 22')
-        self.assertContains(response, 'Angka: 16')
+        response = self.client.get('/list/%d/' % (correct_list.id,))
+    
+        self.assertContains(response, 'Tebakkah angka: 22')
+        self.assertContains(response, 'Angka: 1')
         self.assertContains(response, 'Kamu kalah!!')
 
     
