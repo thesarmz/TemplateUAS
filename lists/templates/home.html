@@ -1,7 +1,16 @@
-{% extends 'base.html' %}
+<html>
+	<head>
+    	<title>Game Tebak Angka</title>
+    </head>
+    <body>
+    	{% extends 'base.html' %}
 
-{% block header_text %}Game Tebak Angka{% endblock %}
-
-{% block form_action %}/lists/new{% endblock %}
-
-{% block comment %}Comment: {{ comment }}{% endblock %} 
+    	<!-- <h1>Start a new To-Do list</h1> -->
+    	{% block header_text %}Game Tebak Angka{% endblock %}
+    	<!-- <form method="POST" action="/lists/new"> -->
+    	<form method="POST" action="{% block form_action %}/lists/new{% endblock %}">
+        	<input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+        	{% csrf_token %}
+    	</form>
+	</body>
+</html>

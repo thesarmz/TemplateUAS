@@ -1,15 +1,32 @@
-{% extends 'base.html' %}
+<html>
+    <head>
+        <title>To-Do lists</title>
+    </head>
+    <body>
+        {% extends 'base.html' %}
 
-{% block header_text %}Game Tebak Angka{% endblock %}
+        <!-- <h1>Your To-Do list</h1> -->
+        {% block header_text %}Game Tebak Angka{% endblock %}
+        <!-- <form method="POST" action="/lists/{{ list.id }}/add_item"> -->
+        <form method="POST" action="{% block form_action %}/lists/{{ list.id }}/add_item{% endblock %}">
+            <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+            {% csrf_token %}
+        </form>
 
-{% block form_action %}/lists/{{ list.id }}/add_item{% endblock %}
 
-{% block comment %}Comment: {{ comment }}{% endblock %} 
+        {% block table %}
+            <table id="id_list_table" class="table">
+                {% for item in list.item_set.all %}
+                    <tr>
+                        <td>
+                            Angka: {{ item.number }}, Tebakan: {{ item.guessnumber }} <br>
+                            {{ item.result }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+                    <span id='komentar'>{{ komentar }}</span>
 
-{% block table %}
-    <table id="id_list_table" class="table">
-        {% for item in list.item_set.all %}
-            <tr><td>Tebakan: {{ item.guessnumber }}, Angka: {{ item.number }} <br> {{ item.result }}</td></tr>
-        {% endfor %}
-    </table>
-{% endblock %}
+        {% endblock %}
+    </body>
+</html>
